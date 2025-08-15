@@ -3,53 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Live Site</title>
+  <title>Dominion Enterprises - Paystack Demo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
+      margin: 30px;
       background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
     }
 
-    header {
+    header, footer {
       background-color: #f4f4f4;
-      padding: 20px;
+      padding: 15px 20px;
       border-radius: 5px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 {
+      color: #2a2a2a;
+    }
+
+    pre {
+      background-color: #eaeaea;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
     }
 
     button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-top: 20px;
+      margin-top: 15px;
       cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
     }
 
-    footer {
-      margin-top: 50px;
-      font-size: 14px;
-      color: #555;
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Website!</h1>
-  </header>
 
-  <main>
-    <p>This site is live on GitHub Pages!</p>
-    <button id="clickMe">Click me!</button>
-  </main>
+<header>
+  <h1>Dominion Enterprises</h1>
+  <p>Paystack API Demo & Tutorial</p>
+</header>
 
-  <footer>
-    <p>© 2025 Your Name</p>
-  </footer>
+<main>
+  <h2>Paystack Integration Guide</h2>
+  <p>This is a demo page showing how you can integrate Paystack APIs into your applications safely.</p>
 
-  <script>
-    document.getElementById('clickMe').addEventListener('click', () => {
-      alert('Hello! Your site is working!');
-    });
-  </script>
+  <h3>Example Code Snippet:</h3>
+  <pre>
+const paystackSecretKey = 'YOUR_SECRET_KEY'; // Never expose this in front-end
+const initializePayment = async () =&gt; {
+    // API call to Paystack goes here
+    console.log('Payment initialized');
+};
+  </pre>
+
+  <button id="demoBtn">Try Demo</button>
+
+  <p style="margin-top:20px;">
+    <strong>Note:</strong> Never put your real secret key in a public site. Use backend for real transactions.
+  </p>
+</main>
+
+<footer>
+  <p>© 2025 Dominion Enterprises</p>
+</footer>
+
+<script>
+document.getElementById('demoBtn').addEventListener('click', () => {
+  alert('This simulates a Paystack API call! Safe demo mode.');
+});
+</script>
+
 </body>
 </html>
