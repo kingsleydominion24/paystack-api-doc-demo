@@ -99,7 +99,7 @@ document.getElementById('payBtn').addEventListener('click', function(){
   let email = document.getElementById('email').value;
   let amount = parseInt(document.getElementById('amount').value);
   let handler = PaystackPop.setup({
-    key: 'YOUR_TEST_PUBLIC_KEY',
+    key: 'pk_test_873d57bb189150bd6187d494493dddee99c9622a',
     email: email,
     amount: amount,
     currency: 'NGN',
@@ -169,7 +169,7 @@ document.getElementById('payBtn').addEventListener('click', function(){
   if(!email){ alert('Please enter your email'); return; }
 
   let handler = PaystackPop.setup({
-    key: key: 'pk_test_873d57bb189150bd6187d494493dddee99c9622a', // Replace with your sandbox public key
+    key: 'pk_test_873d57bb189150bd6187d494493dddee99c9622a', // Your sandbox public key
     email: email,
     amount: amount,
     currency: 'NGN',
