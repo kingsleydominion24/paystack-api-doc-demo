@@ -1,15 +1,98 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Paystack API Documentation Demo - Onyeisi-Kingsley Dominion</title>
-</head>
-<body>
-  <h1>Paystack API Documentation Demo</h1>
-  <p>By Onyeisi-Kingsley Dominion</p>
-  <hr>
-  <pre style="white-space: pre-wrap; font-family: monospace;">
-  <?php include 'paystack_api_doc_demo.md'; ?>
-  </pre>
-</body>
-</html>
+// File: server.js
+// A simple Paystack API integration using Node.js and Express
+
+const express = require('express');
+const axios = require('axios');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
+const PORT = process.env.PORT || 3000;
+
+// Replace with your Paystack secret key
+const PAYSTACK_SECRET_KEY = 'sk_test_your_secret_key_here';
+
+// -----------------------------
+// ROUTES
+// -----------------------------
+
+// 1. Initialize a Transaction
+app.post('/paystack/initialize', async (req, res) => {
+    const { email, amount } = req.body;
+
+    try {
+        const response = await axios.post(
+            'https://api.paystack.co/transaction/initialize',
+            { email, amount: amount * 100 }, // Paystack expects amount in kobo
+            { headers: { Authorization: `Bearer ${PAYSTACK_SECRET_KEY}` } }
+        );
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: error.response.data });
+    }
+});
+
+// 2. Verify a Transaction
+app.get('/paystack/verify/:reference', async (req, res) => {
+    const { reference } = req.params;
+
+    try {
+        const response = await axios.get(
+            `https://api.paystack.co/transaction/verify/${reference}`,
+            { headers: { Authorization: `Bearer ${PAYSTACK_SECRET_KEY}` } }
+        );
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: error.response.data });
+    }
+});
+
+// 3. List Transactions
+app.get('/paystack/transactions', async (req, res) => {
+    try {
+        const response = await axios.get(
+            'https://api.paystack.co/transaction',
+            { headers: { Authorization: `Bearer ${PAYSTACK_SECRET_KEY}` } }
+        );
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: error.response.data });
+    }
+});
+
+// 4. Create a Customer
+app.post('/paystack/customer', async (req, res) => {
+    const { email, first_name, last_name, phone } = req.body;
+
+    try {
+        const response = await axios.post(
+            'https://api.paystack.co/customer',
+            { email, first_name, last_name, phone },
+            { headers: { Authorization: `Bearer ${PAYSTACK_SECRET_KEY}` } }
+        );
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: error.response.data });
+    }
+});
+
+// 5. List Customers
+app.get('/paystack/customers', async (req, res) => {
+    try {
+        const response = await axios.get(
+            'https://api.paystack.co/customer',
+            { headers: { Authorization: `Bearer ${PAYSTACK_SECRET_KEY}` } }
+        );
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: error.response.data });
+    }
+});
+
+// -----------------------------
+// START SERVER
+// -----------------------------
+app.listen(PORT, () => {
+    console.log(`Paystack API server running on http://localhost:${PORT}`);
+});
