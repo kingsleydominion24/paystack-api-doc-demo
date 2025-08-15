@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paystack API Documentation Demo - Onyeisi-Kingsley Dominion</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    header {
+        background-color: #0d2538;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    header h1 {
+        margin: 0;
+    }
+    main {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+    }
+    h2 {
+        color: #0d2538;
+    }
+    code {
+        background-color: #eee;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 0.95em;
+    }
+    pre {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 1em;
+        border: 1px solid #333;
+    }
+    pre code {
+        font-family: Consolas, 'Courier New', monospace;
+        line-height: 1.5;
+    }
+    a {
+        color: #0073e6;
+    }
+    footer {
+        background-color: #0d2538;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Paystack Payment Gateway Integration Guide</h1>
+    <p>Demo Project by Onyeisi-Kingsley Dominion</p>
+</header>
+
+<main>
+    <h2>1. Overview</h2>
+    <p>This guide walks developers through integrating the <strong>Paystack REST API</strong> into their web applications for secure online payments.
+    It covers setup, authentication, payment requests, and handling responses.</p>
+
+    <h2>2. Prerequisites</h2>
+    <ul>
+        <li>A Paystack account (sandbox or live)</li>
+        <li>API keys from the Paystack Dashboard</li>
+        <li>Basic knowledge of JavaScript or Python</li>
+        <li>A development environment with internet access</li>
+    </ul>
+
+    <h2>3. Authentication</h2>
+    <p>Paystack uses <strong>Bearer Token</strong> authentication.</p>
+    <pre><code>Authorization: Bearer YOUR_SECRET_KEY</code></pre>
+
+    <h2>4. Making a Payment Request</h2>
+    <h3>JavaScript (Node.js)</h3>
+    <pre><code>const axios = require('axios');
+
+axios.post('https://api.paystack.co/transaction/initialize', {
+  email: 'customer@example.com',
+  amount: 500000  // Amount in kobo
+}, {
+  headers: {
+    Authorization: 'Bearer YOUR_SECRET_KEY'
+  }
+})
+.then(res => {
+  console.log(res.data);
+})
+.catch(err => {
+  console.error(err);
+});</code></pre>
+
+    <h3>Python</h3>
+    <pre><code>import requests
+
+headers = {
+    "Authorization": "Bearer YOUR_SECRET_KEY",
+    "Content-Type": "application/json"
+}
+
+data = {
+    "email": "customer@example.com",
+    "amount": 500000  # Amount in kobo
+}
+
+response = requests.post("https://api.paystack.co/transaction/initialize", json=data, headers=headers)
+print(response.json())</code></pre>
+
+    <h2>5. Handling Webhooks</h2>
+    <pre><code>from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    payload = request.get_json()
+    print(payload)  # Log the event
+    return '', 200</code></pre>
+
+    <h2>6. Troubleshooting</h2>
+    <ul>
+        <li><strong>401 Unauthorized</strong>: Check your API key.</li>
+        <li><strong>400 Bad Request</strong>: Ensure required fields are provided.</li>
+        <li><strong>Timeout Errors</strong>: Check your internet connection or API status.</li>
+    </ul>
+
+    <h2>7. Resources</h2>
+    <ul>
+        <li><a href="https://paystack.com/docs/api" target="_blank">Paystack API Documentation</a></li>
+        <li><a href="https://paystack.com/docs/payments/test-payments" target="_blank">Testing with Paystack Sandbox</a></li>
+    </ul>
+
+    <p><em>Disclaimer: This is a demo project created by Onyeisi-Kingsley Dominion to showcase technical writing skills. It is not officially commissioned by Paystack.</em></p>
+</main>
+
+<footer>
+    <p>&copy; 2025 Onyeisi-Kingsley Dominion | Technical Writing Demo</p>
+</footer>
+
+</body>
+</html>
