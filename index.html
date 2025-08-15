@@ -1,77 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dominion Enterprises - Interactive Paystack Demo</title>
-  <script src="https://js.paystack.co/v1/inline.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f6fa;
-      margin: 30px;
-      color: #2c3e50;
-      line-height: 1.6;
-    }
-
-    header, footer {
-      text-align: center;
-      background-color: #ecf0f1;
-      padding: 20px;
-      border-radius: 5px;
-      margin-bottom: 25px;
-    }
-
-    section {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 5px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    h1, h2 {
-      color: #34495e;
-    }
-
-    input, select {
-      padding: 10px;
-      margin: 5px 0;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #219150;
-    }
-
-    a {
-      color: #2980b9;
-      text-decoration: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dominion Enterprises - Paystack Learning Hub</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; background-color:#f5f6fa; color:#2c3e50; margin:30px; line-height:1.6; }
+  header, footer { text-align:center; background-color:#ecf0f1; padding:20px; border-radius:5px; margin-bottom:25px; }
+  section { background-color:#fff; padding:20px; border-radius:5px; margin-bottom:25px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+  h1, h2 { color:#34495e; }
+  pre { background-color:#ecf0f1; padding:15px; border-radius:5px; overflow-x:auto; }
+  code { font-family:'Courier New', monospace; color:#e74c3c; }
+  input, select { padding:10px; margin:5px 0; width:100%; box-sizing:border-box; }
+  button { padding:10px 20px; font-size:16px; cursor:pointer; background-color:#27ae60; color:white; border:none; border-radius:5px; margin-top:10px; }
+  button:hover { background-color:#219150; }
+  a { color:#2980b9; text-decoration:none; }
+</style>
 </head>
 <body>
 
 <header>
   <h1>Dominion Enterprises</h1>
-  <p>Interactive Paystack Sandbox Demo</p>
+  <p>Paystack Learning Hub - Interactive & Beginner-Friendly</p>
 </header>
 
 <section>
-  <h2>Try a Sandbox Payment</h2>
-  <p>Enter your email and choose an amount to simulate a Paystack payment safely.</p>
+  <h2>Welcome!</h2>
+  <p>This page is a complete learning hub for Paystack integration. Even if you don't code, you’ll understand how payments work online, see interactive examples, and learn best practices.</p>
+</section>
+
+<section>
+  <h2>1. Why Paystack?</h2>
+  <p>Paystack is a leading payment gateway in Africa. It helps businesses accept payments safely, quickly, and easily. Learning Paystack integration shows you are tech-savvy and ready for real-world projects.</p>
+  <ul>
+    <li>Safe and reliable payment platform.</li>
+    <li>Easy test environment to learn without losing money.</li>
+    <li>Widely used by startups and established companies.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>2. Try a Sandbox Payment</h2>
+  <p>Enter your email and choose an amount. This will simulate a real Paystack payment safely:</p>
   <label for="email">Email:</label>
   <input type="email" id="email" placeholder="customer@example.com" required>
 
@@ -88,16 +59,28 @@
 </section>
 
 <section>
-  <h2>Frontend Code Example</h2>
+  <h2>3. How It Works (Simplified)</h2>
+  <p>Here’s a non-technical explanation for anyone:</p>
+  <ol>
+    <li>You click the “Pay Now” button.</li>
+    <li>Paystack opens a secure checkout popup.</li>
+    <li>You enter card info (sandbox/test card).</li>
+    <li>Paystack processes the payment safely and returns a reference number.</li>
+    <li>The website shows a confirmation.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>4. Frontend Code Example</h2>
+  <p>For coders, here’s how it works under the hood:</p>
   <pre>
 &lt;script src="https://js.paystack.co/v1/inline.js"&gt;&lt;/script&gt;
-&lt;input id="email"&gt; &lt;select id="amount"&gt;&lt;/select&gt;
-&lt;button id="payBtn"&gt;Pay&lt;/button&gt;
+&lt;button id="payBtn"&gt;Pay Now&lt;/button&gt;
 
 &lt;script&gt;
 document.getElementById('payBtn').addEventListener('click', function(){
   let handler = PaystackPop.setup({
-    key: 'YOUR_TEST_PUBLIC_KEY', // Replace with your sandbox public key
+    key: 'YOUR_TEST_PUBLIC_KEY', // Sandbox public key
     email: document.getElementById('email').value,
     amount: parseInt(document.getElementById('amount').value),
     currency: 'NGN',
@@ -105,7 +88,7 @@ document.getElementById('payBtn').addEventListener('click', function(){
       alert('Payment complete! Reference: ' + response.reference);
     },
     onClose: function(){
-      alert('Payment window closed.');
+      alert('Payment closed.');
     }
   });
   handler.openIframe();
@@ -115,8 +98,53 @@ document.getElementById('payBtn').addEventListener('click', function(){
 </section>
 
 <section>
-  <h2>Backend Verification (Recommended)</h2>
-  <p>Verify payments on your backend using your Secret Key to keep it secure.</p>
+  <h2>5. Backend Verification (Recommended)</h2>
+  <p>For real payments, your backend server verifies transactions with your secret key. Example in Node.js:</p>
+  <pre>
+const fetch = require('node-fetch');
+
+app.get('/verify/:reference', async (req, res) =&gt; {
+  const ref = req.params.reference;
+  const response = await fetch(`https://api.paystack.co/transaction/verify/${ref}`, {
+    headers: { Authorization: 'Bearer YOUR_SECRET_KEY' }
+  });
+  const data = await response.json();
+  res.json(data);
+});
+  </pre>
+  <p>Backend verification ensures your site is secure and handles real money safely.</p>
+</section>
+
+<section>
+  <h2>6. Tips for Beginners</h2>
+  <ul>
+    <li>Use sandbox/test mode first.</li>
+    <li>Never put secret keys in the frontend.</li>
+    <li>Always verify transactions on the backend.</li>
+    <li>Keep your UI clean and professional.</li>
+    <li>Document your code so others can learn from it.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>7. FAQs</h2>
+  <p><strong>Q:</strong> Can I use this page to accept real money?<br>
+     <strong>A:</strong> No, this page uses sandbox/test mode. For real payments, you need backend verification and live keys.</p>
+  <p><strong>Q:</strong> Do I need to code to use this page?<br>
+     <strong>A:</strong> No! You can try payments, read explanations, and see how things work.</p>
+  <p><strong>Q:</strong> Can I share this page with anyone?<br>
+     <strong>A:</strong> Yes! Share your GitHub Pages link and anyone can visit it.</p>
+</section>
+
+<section>
+  <h2>8. Why This Matters</h2>
+  <p>This page demonstrates your ability to:</p>
+  <ul>
+    <li>Understand payment gateways professionally.</li>
+    <li>Create interactive, educational web pages.</li>
+    <li>Build portfolio projects that impress recruiters.</li>
+    <li>Make a technical topic understandable for everyone.</li>
+  </ul>
 </section>
 
 <footer>
@@ -128,22 +156,15 @@ document.getElementById('payBtn').addEventListener('click', function(){
   let email = document.getElementById('email').value;
   let amount = parseInt(document.getElementById('amount').value);
 
-  if(!email) {
-    alert('Please enter your email');
-    return;
-  }
+  if(!email) { alert('Please enter your email'); return; }
 
   let handler = PaystackPop.setup({
-    key: 'YOUR_TEST_PUBLIC_KEY', // Replace with sandbox public key
+    key: 'YOUR_TEST_PUBLIC_KEY', // Sandbox public key
     email: email,
     amount: amount,
     currency: 'NGN',
-    callback: function(response){
-      alert('Payment complete! Reference: ' + response.reference);
-    },
-    onClose: function(){
-      alert('Payment window closed.');
-    }
+    callback: function(response){ alert('Payment complete! Reference: ' + response.reference); },
+    onClose: function(){ alert('Payment window closed.'); }
   });
 
   handler.openIframe();
