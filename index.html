@@ -3,48 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dominion Enterprises - Paystack Demo</title>
+  <title>Dominion Enterprises - Paystack Integration Guide</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 30px;
-      background-color: #f9f9f9;
-      color: #333;
       line-height: 1.6;
+      margin: 30px;
+      background-color: #f5f6fa;
+      color: #2c3e50;
     }
 
     header, footer {
-      background-color: #f4f4f4;
-      padding: 15px 20px;
-      border-radius: 5px;
       text-align: center;
-      margin-bottom: 20px;
+      background-color: #ecf0f1;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 25px;
     }
 
     h1, h2, h3 {
-      color: #2a2a2a;
+      color: #34495e;
+    }
+
+    section {
+      margin-bottom: 30px;
+      padding: 15px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     pre {
-      background-color: #eaeaea;
+      background-color: #ecf0f1;
       padding: 15px;
       border-radius: 5px;
       overflow-x: auto;
     }
 
+    code {
+      font-family: 'Courier New', monospace;
+      color: #e74c3c;
+    }
+
     button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-top: 15px;
       cursor: pointer;
+      background-color: #27ae60;
+      color: white;
       border: none;
       border-radius: 5px;
-      background-color: #4CAF50;
-      color: white;
+      margin-top: 10px;
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #219150;
+    }
+
+    a {
+      color: #2980b9;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -52,38 +70,101 @@
 
 <header>
   <h1>Dominion Enterprises</h1>
-  <p>Paystack API Demo & Tutorial</p>
+  <p>Professional Paystack Integration Guide (Test & Sandbox)</p>
 </header>
 
-<main>
-  <h2>Paystack Integration Guide</h2>
-  <p>This is a demo page showing how you can integrate Paystack APIs into your applications safely.</p>
+<section>
+  <h2>1. Overview</h2>
+  <p>Paystack is a powerful payment gateway in Nigeria and Africa. This guide will teach you how to integrate Paystack into your web applications safely using sandbox/test mode so you can learn and showcase your skills.</p>
+</section>
 
-  <h3>Example Code Snippet:</h3>
+<section>
+  <h2>2. Setup a Paystack Sandbox Account</h2>
+  <ol>
+    <li>Go to <a href="https://paystack.com/" target="_blank">Paystack</a> and sign up for a developer/test account.</li>
+    <li>Get your <strong>Test Public Key</strong> and <strong>Secret Key</strong> from the dashboard.</li>
+    <li>Never expose the secret key on the frontend for security reasons.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>3. Frontend Integration (Safe Example)</h2>
+  <p>This example uses the <code>paystack.inline.js</code> script to initialize a payment in test mode.</p>
   <pre>
-const paystackSecretKey = 'YOUR_SECRET_KEY'; // Never expose this in front-end
-const initializePayment = async () =&gt; {
-    // API call to Paystack goes here
-    console.log('Payment initialized');
-};
+&lt;!-- Include Paystack inline script --&gt;
+&lt;script src="https://js.paystack.co/v1/inline.js"&gt;&lt;/script&gt;
+
+&lt;button id="payBtn"&gt;Pay Now&lt;/button&gt;
+
+&lt;script&gt;
+document.getElementById('payBtn').addEventListener('click', function() {
+    let handler = PaystackPop.setup({
+        key: 'YOUR_TEST_PUBLIC_KEY', // Replace with your test public key
+        email: 'customer@example.com',
+        amount: 20000, // Amount in kobo (20,000 kobo = 200 NGN)
+        currency: 'NGN',
+        callback: function(response){
+            alert('Payment complete! Reference: ' + response.reference);
+        },
+        onClose: function(){
+            alert('Payment window closed.');
+        }
+    });
+    handler.openIframe();
+});
+&lt;/script&gt;
   </pre>
+</section>
 
-  <button id="demoBtn">Try Demo</button>
+<section>
+  <h2>4. Backend Integration (Recommended)</h2>
+  <p>For real payments, your backend should handle the <code>secret key</code> to verify transactions:</p>
+  <pre>
+# Example in Node.js using Express
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
 
-  <p style="margin-top:20px;">
-    <strong>Note:</strong> Never put your real secret key in a public site. Use backend for real transactions.
-  </p>
-</main>
+app.get('/verify/:reference', async (req, res) =&gt; {
+    const reference = req.params.reference;
+    const response = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+        headers: {
+            Authorization: 'Bearer YOUR_SECRET_KEY'
+        }
+    });
+    const data = await response.json();
+    res.json(data);
+});
+
+app.listen(3000, () =&gt; console.log('Server running on port 3000'));
+  </pre>
+  <p>This ensures your secret key is never exposed on the front-end.</p>
+</section>
+
+<section>
+  <h2>5. Best Practices</h2>
+  <ul>
+    <li>Always use <strong>sandbox/test mode</strong> while learning.</li>
+    <li>Never put your secret key on the front-end.</li>
+    <li>Verify all transactions on your backend.</li>
+    <li>Keep your Paystack keys secure and rotate them if needed.</li>
+    <li>Provide a clear, professional UI for the user checkout.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>6. Learn & Showcase</h2>
+  <p>By following this guide, you can:</p>
+  <ul>
+    <li>Create a safe, functional Paystack integration.</li>
+    <li>Show your GitHub Pages site with real tutorials and code snippets.</li>
+    <li>Use it as a portfolio project on LinkedIn to demonstrate skills.</li>
+  </ul>
+</section>
 
 <footer>
-  <p>© 2025 Dominion Enterprises</p>
+  <p>© 2025 Dominion Enterprises | <a href="https://paystack.com" target="_blank">Paystack</a></p>
 </footer>
-
-<script>
-document.getElementById('demoBtn').addEventListener('click', () => {
-  alert('This simulates a Paystack API call! Safe demo mode.');
-});
-</script>
 
 </body>
 </html>
