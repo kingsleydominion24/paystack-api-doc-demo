@@ -3,92 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dominion Enterprises - Paystack Learning Hub</title>
+<title>Dominion Enterprises - Paystack Visual Learning Hub</title>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
   body { font-family: Arial, sans-serif; background-color:#f5f6fa; color:#2c3e50; margin:30px; line-height:1.6; }
   header, footer { text-align:center; background-color:#ecf0f1; padding:20px; border-radius:5px; margin-bottom:25px; }
   section { background-color:#fff; padding:20px; border-radius:5px; margin-bottom:25px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
   h1, h2 { color:#34495e; }
+  h3 { color:#16a085; }
   pre { background-color:#ecf0f1; padding:15px; border-radius:5px; overflow-x:auto; }
   code { font-family:'Courier New', monospace; color:#e74c3c; }
   input, select { padding:10px; margin:5px 0; width:100%; box-sizing:border-box; }
   button { padding:10px 20px; font-size:16px; cursor:pointer; background-color:#27ae60; color:white; border:none; border-radius:5px; margin-top:10px; }
   button:hover { background-color:#219150; }
   a { color:#2980b9; text-decoration:none; }
+  img { max-width:100%; border-radius:5px; margin:10px 0; }
+  .diagram-step { margin:15px 0; border-left: 4px solid #16a085; padding-left: 15px; background-color:#ecf0f1; border-radius:4px; }
 </style>
 </head>
 <body>
 
 <header>
   <h1>Dominion Enterprises</h1>
-  <p>Paystack Learning Hub - Interactive & Beginner-Friendly</p>
+  <p>Interactive & Visual Paystack Learning Hub</p>
 </header>
 
 <section>
   <h2>Welcome!</h2>
-  <p>This page is a complete learning hub for Paystack integration. Even if you don't code, you’ll understand how payments work online, see interactive examples, and learn best practices.</p>
-</section>
-
-<section>
-  <h2>1. Why Paystack?</h2>
-  <p>Paystack is a leading payment gateway in Africa. It helps businesses accept payments safely, quickly, and easily. Learning Paystack integration shows you are tech-savvy and ready for real-world projects.</p>
+  <p>This is your full Paystack learning hub. Even if you don’t code, you can:</p>
   <ul>
-    <li>Safe and reliable payment platform.</li>
-    <li>Easy test environment to learn without losing money.</li>
-    <li>Widely used by startups and established companies.</li>
+    <li>Understand how online payments work</li>
+    <li>Interact with sandbox payments</li>
+    <li>See visual workflow diagrams</li>
+    <li>Learn step-by-step for beginners</li>
   </ul>
 </section>
 
 <section>
+  <h2>1. Why Paystack?</h2>
+  <p>Paystack is one of the most trusted payment gateways in Africa. It is widely used by startups and enterprises.</p>
+  <div class="diagram-step">
+    <h3>Visual Overview:</h3>
+    <img src="https://i.imgur.com/6vQ1l3R.png" alt="Paystack Workflow Diagram" />
+    <p>Diagram shows how a payment goes from customer → Paystack → backend verification.</p>
+  </div>
+</section>
+
+<section>
   <h2>2. Try a Sandbox Payment</h2>
-  <p>Enter your email and choose an amount. This will simulate a real Paystack payment safely:</p>
+  <p>Enter your email and select an amount. You’ll see a simulated payment using Paystack’s test environment:</p>
   <label for="email">Email:</label>
   <input type="email" id="email" placeholder="customer@example.com" required>
-
   <label for="amount">Amount (NGN):</label>
   <select id="amount">
     <option value="10000">100 NGN</option>
     <option value="20000">200 NGN</option>
     <option value="50000">500 NGN</option>
   </select>
-
   <button id="payBtn">Pay Now</button>
-
-  <p style="margin-top:10px;"><strong>Test card info:</strong> 4084084084084081 | Exp: 12/34 | CVV: 408 | PIN: 0000</p>
+  <p><strong>Test card info:</strong> 4084084084084081 | Exp: 12/34 | CVV: 408 | PIN: 0000</p>
 </section>
 
 <section>
-  <h2>3. How It Works (Simplified)</h2>
-  <p>Here’s a non-technical explanation for anyone:</p>
-  <ol>
-    <li>You click the “Pay Now” button.</li>
-    <li>Paystack opens a secure checkout popup.</li>
-    <li>You enter card info (sandbox/test card).</li>
-    <li>Paystack processes the payment safely and returns a reference number.</li>
-    <li>The website shows a confirmation.</li>
-  </ol>
+  <h2>3. How It Works (Step-by-Step)</h2>
+  <div class="diagram-step">
+    <h3>Step 1: User clicks Pay Now</h3>
+    <img src="https://i.imgur.com/TI4p0T3.png" alt="Click Pay Now" />
+    <p>Opens Paystack secure checkout popup.</p>
+  </div>
+  <div class="diagram-step">
+    <h3>Step 2: Enter Card Info</h3>
+    <img src="https://i.imgur.com/FAoR0e1.png" alt="Enter Card Info" />
+    <p>Use sandbox/test card for safe learning.</p>
+  </div>
+  <div class="diagram-step">
+    <h3>Step 3: Payment Reference Returned</h3>
+    <img src="https://i.imgur.com/jc8H0Vq.png" alt="Payment Reference" />
+    <p>You see a unique transaction reference confirming the payment.</p>
+  </div>
 </section>
 
 <section>
-  <h2>4. Frontend Code Example</h2>
-  <p>For coders, here’s how it works under the hood:</p>
+  <h2>4. Frontend Code (Safe)</h2>
   <pre>
 &lt;script src="https://js.paystack.co/v1/inline.js"&gt;&lt;/script&gt;
-&lt;button id="payBtn"&gt;Pay Now&lt;/button&gt;
+&lt;input id="email"&gt;
+&lt;select id="amount"&gt;&lt;/select&gt;
+&lt;button id="payBtn"&gt;Pay&lt;/button&gt;
 
 &lt;script&gt;
 document.getElementById('payBtn').addEventListener('click', function(){
+  let email = document.getElementById('email').value;
+  let amount = parseInt(document.getElementById('amount').value);
   let handler = PaystackPop.setup({
-    key: 'YOUR_TEST_PUBLIC_KEY', // Sandbox public key
-    email: document.getElementById('email').value,
-    amount: parseInt(document.getElementById('amount').value),
+    key: 'YOUR_TEST_PUBLIC_KEY',
+    email: email,
+    amount: amount,
     currency: 'NGN',
     callback: function(response){
       alert('Payment complete! Reference: ' + response.reference);
     },
     onClose: function(){
-      alert('Payment closed.');
+      alert('Payment window closed.');
     }
   });
   handler.openIframe();
@@ -98,11 +114,11 @@ document.getElementById('payBtn').addEventListener('click', function(){
 </section>
 
 <section>
-  <h2>5. Backend Verification (Recommended)</h2>
-  <p>For real payments, your backend server verifies transactions with your secret key. Example in Node.js:</p>
+  <h2>5. Backend Verification</h2>
+  <p>Real payments should be verified in the backend for security:</p>
   <pre>
+# Node.js Example
 const fetch = require('node-fetch');
-
 app.get('/verify/:reference', async (req, res) =&gt; {
   const ref = req.params.reference;
   const response = await fetch(`https://api.paystack.co/transaction/verify/${ref}`, {
@@ -112,38 +128,35 @@ app.get('/verify/:reference', async (req, res) =&gt; {
   res.json(data);
 });
   </pre>
-  <p>Backend verification ensures your site is secure and handles real money safely.</p>
+  <p>This ensures safe handling of real money.</p>
 </section>
 
 <section>
-  <h2>6. Tips for Beginners</h2>
+  <h2>6. Tips & Best Practices</h2>
   <ul>
-    <li>Use sandbox/test mode first.</li>
-    <li>Never put secret keys in the frontend.</li>
-    <li>Always verify transactions on the backend.</li>
-    <li>Keep your UI clean and professional.</li>
-    <li>Document your code so others can learn from it.</li>
+    <li>Always start in sandbox/test mode.</li>
+    <li>Never expose secret keys on the frontend.</li>
+    <li>Verify transactions on backend.</li>
+    <li>Keep your UI professional and simple.</li>
+    <li>Document your project for learning and sharing.</li>
   </ul>
 </section>
 
 <section>
-  <h2>7. FAQs</h2>
-  <p><strong>Q:</strong> Can I use this page to accept real money?<br>
-     <strong>A:</strong> No, this page uses sandbox/test mode. For real payments, you need backend verification and live keys.</p>
-  <p><strong>Q:</strong> Do I need to code to use this page?<br>
-     <strong>A:</strong> No! You can try payments, read explanations, and see how things work.</p>
-  <p><strong>Q:</strong> Can I share this page with anyone?<br>
-     <strong>A:</strong> Yes! Share your GitHub Pages link and anyone can visit it.</p>
+  <h2>7. FAQs (For Non-Coders)</h2>
+  <p><strong>Q:</strong> Can I pay real money here?<br><strong>A:</strong> No, it’s sandbox/test mode for learning.</p>
+  <p><strong>Q:</strong> Do I need to code?<br><strong>A:</strong> No, everything is explained with visuals and easy instructions.</p>
+  <p><strong>Q:</strong> Can I share this page?<br><strong>A:</strong> Yes! Copy your GitHub Pages link.</p>
 </section>
 
 <section>
   <h2>8. Why This Matters</h2>
-  <p>This page demonstrates your ability to:</p>
+  <p>This page shows you can:</p>
   <ul>
-    <li>Understand payment gateways professionally.</li>
-    <li>Create interactive, educational web pages.</li>
-    <li>Build portfolio projects that impress recruiters.</li>
-    <li>Make a technical topic understandable for everyone.</li>
+    <li>Create interactive learning content</li>
+    <li>Explain technical topics visually</li>
+    <li>Build portfolio-ready projects</li>
+    <li>Make Paystack integration understandable to anyone</li>
   </ul>
 </section>
 
@@ -155,18 +168,15 @@ app.get('/verify/:reference', async (req, res) =&gt; {
 document.getElementById('payBtn').addEventListener('click', function(){
   let email = document.getElementById('email').value;
   let amount = parseInt(document.getElementById('amount').value);
-
-  if(!email) { alert('Please enter your email'); return; }
-
+  if(!email){ alert('Enter your email'); return; }
   let handler = PaystackPop.setup({
-    key: 'YOUR_TEST_PUBLIC_KEY', // Sandbox public key
+    key: 'YOUR_TEST_PUBLIC_KEY',
     email: email,
     amount: amount,
     currency: 'NGN',
     callback: function(response){ alert('Payment complete! Reference: ' + response.reference); },
-    onClose: function(){ alert('Payment window closed.'); }
+    onClose: function(){ alert('Payment closed.'); }
   });
-
   handler.openIframe();
 });
 </script>
